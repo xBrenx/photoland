@@ -11,10 +11,45 @@ datasource db {
 }
 
 model User {
-  id Int @id @default(autoincrement())
+  id String @id @default(uuid())
   createdAt DateTime @default(now())
   email     String   @unique
+  emailConfirmed Boolean @default(false)
+  isAdmin Boolean @default(false)
   name      String?
+  userProfile UserProfile?
+}
+
+model UserProfile {
+  id String @id @default(uuid())
+  user User @relation(fields: [userId], references: [id])
+  userId String @unique
+  post Post[]
+  comments Comment[]
+}
+
+model Post {
+  id String @id @default(uuid())
+  createAt DateTime @default(now())
+  author UserProfile @relation(fields: [authorId], references: [id])
+  authorId String
+  title String @db.VarChar(300)
+  caption String @db.VarChar(1000)
+  upVotes Int @default(0)
+  downVotes Int @default(0)
+  comments Comment[]
+}
+
+model Comment {
+  id String @id @default(uuid())
+  createAt DateTime @default(now())
+  caption String @db.VarChar(1000)
+  upVotes Int @default(0)
+  downVotes Int @default(0)
+  author UserProfile @relation(fields: [authorId], references: [userId])
+  authorId String
+  post Post @relation(fields: [postId], references: [id])
+  postId String @unique
 }
 
 model Product {
@@ -22,11 +57,11 @@ model Product {
   name String
   price Int @default(999)
   xreateAt DateTime @default(now())
-  category category @relation(fields: [categoryId], references: [id])
+  category Category @relation(fields: [categoryId], references: [id])
   categoryId Int
 }
 
-model category {
+model Category {
   id Int @id @default(autoincrement())
   name String @unique
   products Product[]
