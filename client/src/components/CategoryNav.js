@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 const CategoryNav = () => {
   const { data } = useFetch('/categories');
+  console.log("CategoryNav --> " , data);
   
   return (
     <aside className='hidden xl:flex'>

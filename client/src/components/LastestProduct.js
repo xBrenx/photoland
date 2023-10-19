@@ -5,6 +5,7 @@ import ProductSlider from './ProductSlider';
 
 const LastestProduct = () => {
   const { data } = useFetch('/products?populate=*&filters[isNew]=true');
+  console.log("LastestProduct --> " , data);
 
   return (
     <div className='mb-16'>

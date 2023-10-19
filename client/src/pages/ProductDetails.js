@@ -9,6 +9,7 @@ const ProductDetails = () => {
   const { addToCart } = useContext(CartContext);
   const { id } = useParams();
   const { data } = useFetch(`/products?populate=*&filters[id][$eq]=${id}`);
+  console.log("data --> " , data);
 
   if(!data) {
     return <div className='container mx-auto'>
