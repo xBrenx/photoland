@@ -1,0 +1,18 @@
+{
+    "compilerOptions": {
+      "allowImportingTsExtensions": true,
+      "target": "ES2020",             // Compilar a ECMAScript 2015 o superior
+      "module": "commonjs",         // Utilizar el sistema de módulos CommonJS (compatible con Node.js)
+      "outDir": "./dist",           // Directorio donde se guardarán los archivos compilados
+      "rootDir": "./src",           // Directorio de origen de los archivos TypeScript
+      "strict": true,               // Habilitar estrictas comprobaciones de tipos
+      "allowJs": true,
+      "esModuleInterop": true,       // Habilitar la interoperabilidad de módulos ES6 y CommonJS
+      "noEmit": true,
+      "moduleResolution": "node",
+      // Otras opciones de compilación, si es necesario
+    },
+    "type": "module",
+    "include": ["src/**/*.ts", "index.js", "src/routes/users.js"],     // Patrón para incluir archivos TypeScript a compilar
+    "exclude": ["node_modules"]     // Carpetas o archivos para excluir de la compilación
+  }
