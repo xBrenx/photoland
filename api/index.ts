@@ -6,7 +6,7 @@ import users from './src/routes/users.routes.ts';
 
 const PORT = 3001;
 
-const prisma = new PrismaClient();
+// const prisma = new PrismaClient();
 
 app.use(express.json()); //middleware que transforma req.body en json
 
