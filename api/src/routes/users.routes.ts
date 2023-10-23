@@ -1,34 +1,48 @@
 import { Router, Request, Response } from "express";
-import { getAllUsers, createNewUser } from "../controllers/users";
+import { getAllUsers, createNewUser, deleteAllUsers } from "../controllers/users";
 import { getErrorMessage } from "../lib/utils";
+import { createUserProfile } from "../controllers/UsersProfile";
 const router = Router();
 
-router.get("/", async (req: Request, res: Response) => {
+router.get("/", async ( req: Request, res: Response ) => {
 
     try {
         const result =  await getAllUsers();
         return res.json(result);
 
-    } catch (error : unknown) {
-        return `error in users route: ${getErrorMessage(error)}`
+    } catch (error: unknown) {
+        return `error in users route: ${error}`
     }
 
 });
 
-router.post("/", async (req: Request, res: Response) => {
-    
-    const {email, name} = req.body;
-
+router.post("/", async ( req: Request, res: Response ) => {
+    const {email, name, userName} = req.body;
 
     try {
-        const newUser = await createNewUser(email, name);
-        console.log(newUser);
-        res.status(200).send(newUser);
+        const newUser = await createNewUser(email, name, userName);//create user
+        const newUserProfile = await createUserProfile(newUser.id)//create profile user
 
-    } catch (error : unknown) {
-        res.status(404).send(`error in users route: ${getErrorMessage(error)}`);
+        res.status(200).send([newUser, newUserProfile]);
+
+    } catch (error: unknown) {
+        res.status(404).send(`error in users route: ${error}`);
     }
 
 });
+
+router.delete("/:id", async ( req: Request, res: Response ) => {
+    const { id } = req.params;
+
+   try {
+    const deleteUser = await deleteAllUsers(id);
+    res.status(200).send(deleteUser);
+    
+   } catch (error: unknown) {
+    res.status(404).send(`error in users route: ${error}`);
+   } 
+
+});
+
 
 export default router;
