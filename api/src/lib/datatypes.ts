@@ -1,7 +1,12 @@
 export interface User {
+    id: string,
     createdAt: Date,
-    email: String,
+    email: string,
     emailConfirmed: Boolean,
     isAdmin: Boolean,
-    name: String,
+    name: string | null,
+}
+
+export interface Error {
+    error: string,
 }
