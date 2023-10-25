@@ -60,6 +60,7 @@ model Product {
   xreateAt DateTime @default(now())
   category Category @relation(fields: [categoryId], references: [id])
   categoryId Int
+  isNew Boolean @default(false)
 }
 
 model Category {
