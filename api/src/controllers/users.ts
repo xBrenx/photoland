@@ -8,7 +8,7 @@ export const getAllUsers = async () => {
     try {
         const AllUsers = await prisma.user.findMany();
         if (AllUsers.length === 0) {
-            return `There are no users in the database`;
+            throw new Error(`There are no users in the database`);
         }else{
             return AllUsers;
         }
