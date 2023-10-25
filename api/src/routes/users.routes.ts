@@ -1,6 +1,5 @@
 import { Router, Request, Response } from "express";
 import { getAllUsers, createNewUser, deleteAllUsers } from "../controllers/users";
-import { getErrorMessage } from "../lib/utils";
 import { createUserProfile } from "../controllers/UsersProfile";
 const router = Router();
 
@@ -11,7 +10,7 @@ router.get("/", async ( req: Request, res: Response ) => {
         return res.json(result);
 
     } catch (error: unknown) {
-        return `error in users route: ${error}`
+        res.status(404).send(`error in users route: ${error}`);
     }
 
 });
