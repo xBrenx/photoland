@@ -4,6 +4,7 @@ const app = express();
 import { PrismaClient } from '@prisma/client';
 import users from './src/routes/users.routes.ts';
 import products from `./src/routes/products.routes.ts`;
+import category from `./src/routes/category.routes.ts`;
 
 const PORT = 3001;
 
@@ -16,6 +17,7 @@ app.get("/", (req : Request , res : Response) => {
  });
 
  app.use("/users", users);
+ app.use("/categories", category);
  app.use ("/products", products);
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT} ^3^`));
