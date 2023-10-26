@@ -1,6 +1,5 @@
 import { PrismaClient } from "@prisma/client";
 import { getErrorMessage } from "../lib/utils";
-import router from "../routes/users.routes";
 const prisma = new PrismaClient();
 
 export const getAllProducts = async () => {
@@ -34,5 +33,3 @@ export const getNewProductsFilter = async () => {
     }
 
 };
-
-export default router;
