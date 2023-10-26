@@ -10,7 +10,7 @@ router.get("/", async ( req: Request, res: Response ) => {
         return res.json(result);
 
     } catch (error: unknown) {
-        res.status(404).send(`error in users route: ${error}`);
+        res.status(404).send(error);
     }
 
 });
@@ -25,7 +25,7 @@ router.post("/", async ( req: Request, res: Response ) => {
         res.status(200).send([newUser, newUserProfile]);
 
     } catch (error: unknown) {
-        res.status(404).send(`error in users route: ${error}`);
+        res.status(404).send(error);
     }
 
 });
@@ -38,7 +38,7 @@ router.delete("/:id", async ( req: Request, res: Response ) => {
     res.status(200).send(deleteUser);
     
    } catch (error: unknown) {
-    res.status(404).send(`error in users route: ${error}`);
+    res.status(404).send(error);
    } 
 
 });
